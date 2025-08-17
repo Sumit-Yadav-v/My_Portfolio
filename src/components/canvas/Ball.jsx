@@ -1,5 +1,3 @@
-import { useLoader } from "@react-three/fiber";
-import { TextureLoader } from "three";
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
@@ -9,39 +7,8 @@ import {
   Preload,
   useTexture,
 } from "@react-three/drei";
-import {css,
-  docker,
-  figma,
-  git,
-  html,
-  javascript,
-  mongodb,
-  nodejs,
-  reactjs,
-  redux,
-  tailwind,
-  threejs,
-  typescript
-} from "../../assets";
-
 
 import CanvasLoader from "../Loader";
-
-// ✅ Preload texture
-useLoader.preload(TextureLoader, css);
-useLoader.preload(TextureLoader, mongodb);
-useLoader.preload(TextureLoader, reactjs);
-useLoader.preload(TextureLoader, tailwind);
-useLoader.preload(TextureLoader, redux);
-useLoader.preload(TextureLoader, figma);
-useLoader.preload(TextureLoader, git);
-useLoader.preload(TextureLoader, html);
-useLoader.preload(TextureLoader, nodejs);
-useLoader.preload(TextureLoader, typescript);
-useLoader.preload(TextureLoader, threejs);
-useLoader.preload(TextureLoader, docker);
-useLoader.preload(TextureLoader, javascript);
-
 
 const Ball = (props) => {
   const [decal] = useTexture([props.imgUrl]);
