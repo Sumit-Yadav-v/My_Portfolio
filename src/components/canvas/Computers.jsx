@@ -9,20 +9,20 @@ const Computers = ({ isMobile }) => {
 
   return (
     <mesh>
-      <hemisphereLight intensity={2} groundColor="black" />
+      <hemisphereLight intensity={1.2} groundColor="black" />
       <spotLight
-        position={[-20, 50, 10]}
-        angle={0.12}
+        position={[-15, 35, 10]}
+        angle={0.15}
         penumbra={1}
-        intensity={1}
+        intensity={0.8}
         castShadow
-        shadow-mapSize={1024}
+        shadow-mapSize={512} // 👈 lower shadow resolution
       />
-      <pointLight intensity={1} />
+      <pointLight intensity={0.8} />
       <primitive
         object={computer.scene}
-        scale={isMobile ? 0.06 : 0.072}
-        position={isMobile ? [0, -3.25, -0.6] : [0, -3.8, -0.6]}
+        scale={isMobile ? 0.05 : 0.072}
+        position={isMobile ? [0, -3, -0.5] : [0, -3.8, -0.6]}
         rotation={[-0.01, -0.2, 0]}
       />
     </mesh>
@@ -45,21 +45,12 @@ const ComputersCanvas = () => {
     checkMobile();
   }, []);
 
-  // ✅ Instead of hiding completely, render fallback
-  if (isMobile) {
-    return (
-      <div className="flex items-center justify-center w-full h-[300px] bg-black">
-        <p className="text-white text-lg">🚀 3D Preview disabled on mobile</p>
-      </div>
-    );
-  }
-
   return (
     <Canvas
       frameloop="demand"
       shadows
-      dpr={[1, 2]}
-      camera={{ position: [20, 3, 5], fov: 25 }}
+      dpr={isMobile ? [1, 1.5] : [1, 2]} // 👈 lighter rendering on mobile
+      camera={{ position: isMobile ? [15, 2, 5] : [20, 3, 5], fov: 30 }}
       gl={{ preserveDrawingBuffer: true }}
     >
       <Suspense fallback={<CanvasLoader />}>
