@@ -33,27 +33,22 @@ const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 850px)");
-    setIsMobile(mediaQuery.matches);
-
-    const handleMediaQueryChange = (event) => {
-      setIsMobile(event.matches);
-    };
-
-    mediaQuery.addEventListener("change", handleMediaQueryChange);
-    return () => {
-      mediaQuery.removeEventListener("change", handleMediaQueryChange);
-    };
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    if (/android/i.test(ua) || /iPhone|iPad|iPod/i.test(ua)) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
   }, []);
 
-  // 🚀 Don't render anything if it's mobile
+  // 🚫 Don’t render anything on mobile
   if (isMobile) {
     return null;
   }
 
   return (
     <Canvas
-      frameloop='demand'
+      frameloop="demand"
       shadows
       dpr={[1, 2]}
       camera={{ position: [20, 3, 5], fov: 25 }}
