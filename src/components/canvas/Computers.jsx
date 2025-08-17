@@ -9,7 +9,7 @@ const Computers = ({ isMobile }) => {
 
   return (
     <mesh>
-      <hemisphereLight intensity={2} groundColor='black' />
+      <hemisphereLight intensity={2} groundColor="black" />
       <spotLight
         position={[-20, 50, 10]}
         angle={0.12}
@@ -33,27 +33,30 @@ const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 850px)");
-    setIsMobile(mediaQuery.matches);
-
-    const handleMediaQueryChange = (event) => {
-      setIsMobile(event.matches);
+    const checkMobile = () => {
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
+      if (/android/i.test(ua) || /iPhone|iPad|iPod/i.test(ua)) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
     };
 
-    mediaQuery.addEventListener("change", handleMediaQueryChange);
-    return () => {
-      mediaQuery.removeEventListener("change", handleMediaQueryChange);
-    };
+    checkMobile();
   }, []);
 
-  // 🚀 Don't render anything if it's mobile
+  // ✅ Instead of hiding completely, render fallback
   if (isMobile) {
-    return null;
+    return (
+      <div className="flex items-center justify-center w-full h-[300px] bg-black">
+        <p className="text-white text-lg">🚀 3D Preview disabled on mobile</p>
+      </div>
+    );
   }
 
   return (
     <Canvas
-      frameloop='demand'
+      frameloop="demand"
       shadows
       dpr={[1, 2]}
       camera={{ position: [20, 3, 5], fov: 25 }}
