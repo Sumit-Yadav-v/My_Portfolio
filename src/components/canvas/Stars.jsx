@@ -10,7 +10,7 @@ const Stars = (props) => {
 
   // Generate 20,000 random points inside a sphere radius 1.5
   const [sphere] = useState(
-    () => inSphere(new Float32Array(10000), { radius: 1.5 })
+    () => inSphere(new Float32Array(5000), { radius: 1.5 })
   );
 
   // Rotate stars slowly
