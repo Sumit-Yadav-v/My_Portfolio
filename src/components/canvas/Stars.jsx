@@ -16,8 +16,8 @@ const Stars = (props) => {
   // Rotate stars slowly
   useFrame((_, delta) => {
     if (ref.current) {
-      ref.current.rotation.x -= delta / 40;
-      ref.current.rotation.y -= delta / 40;
+      ref.current.rotation.x -= delta / 20;
+      ref.current.rotation.y -= delta / 35;
     }
   });
 
@@ -27,7 +27,7 @@ const Stars = (props) => {
   <PointMaterial
     transparent
     color="#f272c8"
-    size={0.001}
+    size={0.002}
     sizeAttenuation
     depthWrite={false}
   />
